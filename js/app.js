@@ -42,7 +42,7 @@ function results() {  // returns wrong when comp. # is 10
         return resultOutputEl.innerText = "correct!";
         };
 };
-function guessHistoryDisplay() {
+function guessHistoryDisplay(event) {
         let userNumber = numberSelectorEl.value;
         historyArr.push(userNumber);
         return guessHistoryEl.innerText = historyArr;
@@ -70,8 +70,14 @@ function restartRender() {
 
 };
 //eventlistener1 below
-submitBtnEl.addEventListener("click", function() {
+submitBtnEl.addEventListener("click", function(event) {
+    // logic that checks for an acceptable input
+    if(numberSelectorEl.textLength === 0 || numberSelectorEl.value <= 0) {
+        alert(`please input a number 1-10`);
+        event.preventDefault();
+    }else{
     submitRender();
+    };
 });
 //eventlistener2 below
 restartBtnEl.addEventListener("click", function() {
