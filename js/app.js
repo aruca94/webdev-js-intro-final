@@ -31,6 +31,14 @@ function computerNumber() {
     ComputerGuessEl.innerText = Math.round(randomNum);
 };
 
+function guessHistoryDisplay() {
+        // needs to display three attempts
+        // idk how to do that :'(
+        // create empty array
+        //when btn is pressed push user guess in
+        //display to span
+};
+
 //render function
 function submitRender() {
     userNumSelect();
