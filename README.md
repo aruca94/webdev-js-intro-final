@@ -49,7 +49,7 @@ If you get stuck, write psuedocode and break the game's functionality and logic 
 ### Tips
 - Push a commit for each task completed. Include a meaningfull commit message.
 - Before the above, update the readme task list to track your progress. To do this, enter x between the brackets.
-- Get used to using your browser's developer tools now. For now, become familiar with: 
+- Get used to using your browser's developer tools now. For now, become familiar with:
     - Toggling between desktop mode and device emulation/responsive mode.
     - Using inspector mode to inspect elements.
 - If you get stuck, please remember that you have various resources available to you.
