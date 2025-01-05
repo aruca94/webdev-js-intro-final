@@ -1,8 +1,6 @@
 "use strict";
-
-// constants for element tags below
-// need constants for:
-// count input box  TODO: use .value on this to display #
+//immutable variables below
+//input box
 const numberSelectorEl = document.getElementById("guess-input");
 // result
 const resultOutputEl = document.getElementById("guess-message");
@@ -16,9 +14,8 @@ const guessHistoryEl = document.getElementById("guess-history");
 const restartBtnEl = document.getElementById("restart-btn");
 //submit button
 const submitBtnEl = document.getElementById("submit-btn");
+// attempts left paragraph
 const attemptsLeftEl = document.getElementById("attempts-left");
-
-// if there's enough time, fade background and hide display of everything except restart button, change text, and ask player if they want to restart
 
 // mutable variables below
 let historyArr = [];
@@ -35,8 +32,6 @@ function computerNumber() {
 };
 
 function results() {
-
-
     if(parseInt(currentGuessEl.innerText) > parseInt(computerGuessEl.innerText) && userAttempt > 1 ) {
          resultOutputEl.innerText = "too high";
          attemptsLeftEl.innerText = `You have ${userAttempt - 1} attempts left.`;
@@ -46,20 +41,21 @@ function results() {
         }else if(parseInt(currentGuessEl.innerText) === parseInt(computerGuessEl.innerText) && userAttempt >= 1){
          resultOutputEl.innerText = "You win!";
          submitBtnEl.disabled = true;
+         restartBtnEl.disabled = false;
          attemptsLeftEl.innerText = `Would you like to try again?`;
         }else{
             submitBtnEl.disabled = true;
+            restartBtnEl.disabled = false;
             resultOutputEl.innerText = "You have lost";
             attemptsLeftEl.innerText = `Would you like to try again?`;
         };
     };
+
 function guessHistoryDisplay() {
         let userNumber = numberSelectorEl.value;
         historyArr.push(userNumber);
         guessHistoryEl.innerText = historyArr;
     };
-
-
 //render function
 function submitRender() {
     // guessAndResults();
@@ -69,13 +65,23 @@ function submitRender() {
     guessHistoryDisplay()
     // triesLeft();
 };
-
+//restart function
 function restartRender() {
-
+    historyArr = [];
+    userAttempt = 3;
+    numberSelectorEl.value = "";
+    resultOutputEl.innerText = "";
+    currentGuessEl.innerText = "";
+    computerGuessEl.innerText = "";
+    guessHistoryEl.innerText = "";
+    resultOutputEl.innerText = "";
+    submitBtnEl.disabled = false;
+    restartBtnEl.disabled = true;
+    attemptsLeftEl.innerText = `Try to guess the computer's number within 3 tries!`
 };
-//eventlistener1 below
+//submit button eventlistener below
 submitBtnEl.addEventListener("click", function(event) {
-    // logic that checks for an acceptable input
+// logic that checks for an acceptable input
     if( numberSelectorEl.value <= 0 || numberSelectorEl.value > 10) {
         alert(`please input a number 1-10`);
         event.preventDefault();
@@ -84,10 +90,7 @@ submitBtnEl.addEventListener("click", function(event) {
         userAttempt -=1;
     };
 });
-//eventlistener2 below
-// restartBtnEl.addEventListener("click", function() {
-//     restartRender();
-// });
-
-
-// user will select a number and hit the submit button. Then, result, both guesses will populate. guess history will show all attempts in the game. Once 3 attempts have been made, if user is unsuccessful the game will restart.
+//restart eventlistener below
+ restartBtnEl.addEventListener("click", function() {
+     restartRender();
+ });
